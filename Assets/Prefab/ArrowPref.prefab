@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3370127784734412417}
   - component: {fileID: 4783427849071147061}
   - component: {fileID: 375079699652712866}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ArrowPref
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,7 +143,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -161,3 +161,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c96d18a5cd7bd45bfac6f697b8e2e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrowDamage: 1
