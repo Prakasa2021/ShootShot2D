@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,11 +34,13 @@ public class Health : MonoBehaviour
         else if (health <= 0f)
         {
             health = 0f;
+            healthBar.value = health;
         }
     }
 
     void OnGUI()
     {
-        healthBar.value = health;
+        float t = Time.deltaTime / 1f;
+        healthBar.value = Mathf.Lerp(healthBar.value, health, t);
     }
 }

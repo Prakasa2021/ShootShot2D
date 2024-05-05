@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] int enemyHealth;
-    [SerializeField] int enemyMaxHealth;
+    [SerializeField] float enemyHealth;
+    [SerializeField] float enemyMaxHealth;
     [SerializeField] int enemyDamage;
     [SerializeField] float speed;
     [SerializeField] float attackSpeed;
@@ -30,21 +30,17 @@ public class Enemy : MonoBehaviour
         transform.Translate(speed * Time.deltaTime * Vector2.left);
     }
 
-    public void UpdateHealth(int atk)
+    public void TakeDamage(float dmg)
     {
-        enemyHealth += atk;
+        enemyHealth -= dmg;
 
-        if (enemyHealth > enemyMaxHealth)
-        {
-            enemyHealth = enemyMaxHealth;
-        }
-        else if (enemyHealth <= 0f)
+        MakeTransparent();
+
+        if (enemyHealth <= 0)
         {
             enemyHealth = 0;
             Destroy(gameObject);
         }
-
-        MakeTransparent();
     }
 
     // void OnTriggerEnter2D(Collider2D other)

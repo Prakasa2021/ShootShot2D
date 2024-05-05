@@ -413,7 +413,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 576058296}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: -6, z: 0}
+  m_LocalPosition: {x: 0, y: -6, z: 0}
   m_LocalScale: {x: 10, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -554,7 +554,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &620678855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,12 +575,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1682984003, guid: 057e3ad8466fb1d42b245ef2b8a9b714, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: -672581972, guid: 96a80bd165d6f0b4cb1992623bfbc2e6, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillMethod: 0
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -651,12 +651,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1959307054, guid: 057e3ad8466fb1d42b245ef2b8a9b714, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 1843831751, guid: 96a80bd165d6f0b4cb1992623bfbc2e6, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillMethod: 0
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 640723977}
   m_Layer: 0
   m_Name: Bow
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -892,6 +892,8 @@ MonoBehaviour:
   trajectoryStepCount: 15
   fireRate: 3
   nextFire: 0
+  maxBowCharge: 3
+  bowCharge: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1414,7 +1416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: 0
   enemyMaxHealth: 10
-  enemyDamage: 5
+  enemyDamage: 10
   speed: 0.5
   attackSpeed: 1.5
   canAttack: 0
@@ -2024,7 +2026,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 655469603, guid: 057e3ad8466fb1d42b245ef2b8a9b714, type: 3}
+  m_Sprite: {fileID: -712525042, guid: 96a80bd165d6f0b4cb1992623bfbc2e6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2100,7 +2102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1078476998, guid: 057e3ad8466fb1d42b245ef2b8a9b714, type: 3}
+  m_Sprite: {fileID: -712525042, guid: 96a80bd165d6f0b4cb1992623bfbc2e6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2228,7 +2230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: 215}
+  m_AnchoredPosition: {x: 215, y: 215}
   m_SizeDelta: {x: 210, y: 25}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1818014671

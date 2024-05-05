@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] public int arrowDamage;
+    [SerializeField] public float arrowDamage;
+    [SerializeField] public float arrowTotalDamage;
     Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -24,7 +25,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<Enemy>().UpdateHealth(-arrowDamage);
+            other.gameObject.GetComponent<Enemy>().TakeDamage(arrowTotalDamage);
             Destroy(gameObject);
         }
     }

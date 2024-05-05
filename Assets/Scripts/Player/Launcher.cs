@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +16,9 @@ public class Launcher : MonoBehaviour
     [SerializeField] int trajectoryStepCount = 15;
     [SerializeField] float fireRate = 3f;
     [SerializeField] float nextFire;
-
+    [Range(0, 3)][SerializeField] float maxBowCharge;
     Vector2 velocity, startMousePos, currentMousePos;
+    float bowCharge;
 
     void Start()
     {
@@ -35,9 +37,9 @@ public class Launcher : MonoBehaviour
         {
             startMousePos = Camera.main.ScreenToWorldPoint(screenPosDepth);
         }
-
-        if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0))
         {
+            ChargeBow();
             arrowGFX.enabled = true;
             currentMousePos = Camera.main.ScreenToWorldPoint(screenPosDepth);
             velocity = (startMousePos - currentMousePos) * launchForce;
@@ -45,10 +47,20 @@ public class Launcher : MonoBehaviour
             RotateLauncher();
             DrawTrajectory();
         }
-
-        if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
         {
             ClearTrajectory();
+        }
+        else
+        {
+            if (bowCharge > 0f)
+            {
+                bowCharge -= 1f * Time.deltaTime;
+            }
+            else
+            {
+                bowCharge = 0f;
+            }
         }
 
         if (Time.time > nextFire)
@@ -85,6 +97,11 @@ public class Launcher : MonoBehaviour
         lineRenderer.SetPositions(positions);
     }
 
+    void ChargeBow()
+    {
+        bowCharge += Time.deltaTime;
+    }
+
     void RotateLauncher()
     {
         float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
@@ -96,8 +113,17 @@ public class Launcher : MonoBehaviour
         arrowGFX.enabled = false;
         cooldownFire.value = fireRate;
 
+        if (bowCharge > maxBowCharge)
+        {
+            bowCharge = maxBowCharge;
+        }
+
         Transform pr = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
         pr.GetComponent<Rigidbody2D>().velocity = velocity;
+        Projectile projectileDamage = pr.GetComponent<Projectile>();
+
+        float projectileTotalDamage = bowCharge * projectileDamage.arrowDamage;
+        projectileDamage.arrowTotalDamage = projectileTotalDamage;
     }
 
     void ClearTrajectory()
