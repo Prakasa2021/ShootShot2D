@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cce726700fd104842817bff8bcec2449
+guid: b405b1cd4e2c269478d8720bed58446c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,18 +121,84 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: BarUI_2_0
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 2890
+        width: 5632
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c5aa7940a1e7ec4b9ec2657f21450c6
+      internalID: -158271112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BarUI_2_1
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 1454
+        width: 5626
+        height: 562
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5f0a699a171fd44b84dff546048dfe2
+      internalID: 1745745092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BarUI_2_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 5716
+        height: 641
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 586f96a598a218a43bd634a7cd233f14
+      internalID: -1771841661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 88b4208fc8eba014f81a022a510102b7
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BarUI_2_0: -158271112
+      BarUI_2_1: 1745745092
+      BarUI_2_2: -1771841661
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

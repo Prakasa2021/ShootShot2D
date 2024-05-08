@@ -12,8 +12,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] float canAttack;
     [SerializeField] float transparencyDuration = 1f; // Duration of transparency effect in seconds
     [SerializeField] float transparencyAmount = 0.5f; // Transparency amount (0 = fully transparent, 1 = fully opaque)
+    [SerializeField] int enemyValue;
     SpriteRenderer spriteRenderer;
     Color originalColor; // Original color of the sprite
+    private GameManager gameManager;
 
     // [SerializeField] Projectile projectile;
 
@@ -22,6 +24,7 @@ public class Enemy : MonoBehaviour
         enemyHealth = enemyMaxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color; // Store the original color of the sprite
+        gameManager = GameManager.instance;
     }
 
     void Update()
@@ -38,6 +41,7 @@ public class Enemy : MonoBehaviour
 
         if (enemyHealth <= 0)
         {
+            gameManager.GemsCount(enemyValue);
             enemyHealth = 0;
             Destroy(gameObject);
         }

@@ -16,7 +16,7 @@ public class Launcher : MonoBehaviour
     [SerializeField] int trajectoryStepCount = 15;
     [SerializeField] float fireRate = 3f;
     [SerializeField] float nextFire;
-    [Range(0, 3)][SerializeField] float maxBowCharge;
+    [Range(0, 5)][SerializeField] float maxBowCharge;
     Vector2 velocity, startMousePos, currentMousePos;
     float bowCharge;
 
