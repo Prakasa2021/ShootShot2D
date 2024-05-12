@@ -19,6 +19,7 @@ public class Launcher : MonoBehaviour
     [Range(0, 5)][SerializeField] float maxBowCharge;
     Vector2 velocity, startMousePos, currentMousePos;
     float bowCharge;
+    bool isCharge = true;
 
     void Start()
     {
@@ -39,7 +40,9 @@ public class Launcher : MonoBehaviour
         }
         else if (Input.GetMouseButton(0))
         {
-            ChargeBow();
+            if (isCharge)
+                ChargeBow();
+
             arrowGFX.enabled = true;
             currentMousePos = Camera.main.ScreenToWorldPoint(screenPosDepth);
             velocity = (startMousePos - currentMousePos) * launchForce;
@@ -51,7 +54,8 @@ public class Launcher : MonoBehaviour
         {
             ClearTrajectory();
         }
-        else
+
+        if (!isCharge)
         {
             if (bowCharge > 0f)
             {
@@ -60,6 +64,7 @@ public class Launcher : MonoBehaviour
             else
             {
                 bowCharge = 0f;
+                isCharge = true;
             }
         }
 
@@ -67,6 +72,7 @@ public class Launcher : MonoBehaviour
         {
             if (Input.GetMouseButtonUp(0))
             {
+                isCharge = false;
                 nextFire = Time.time + fireRate;
                 FireProjectile();
             }

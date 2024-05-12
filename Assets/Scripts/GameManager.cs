@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] int gemsCount;
     [SerializeField] float timeRemaining;
     [SerializeField] TMP_Text timeText;
+    [SerializeField] Launcher launcher;
+    [SerializeField] GameObject upgradeUI;
 
     void Awake()
     {
@@ -24,6 +26,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         timeIsRunning = true;
+        upgradeUI.SetActive(false);
     }
 
     void Update()
@@ -38,6 +41,12 @@ public class GameManager : MonoBehaviour
             else
             {
                 timeIsRunning = false;
+
+                if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+                {
+                    upgradeUI.SetActive(true);
+                    launcher.enabled = false;
+                }
             }
         }
     }
