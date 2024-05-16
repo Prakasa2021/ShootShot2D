@@ -11,20 +11,25 @@ public class Launcher : MonoBehaviour
     [SerializeField] LineRenderer lineRenderer;
     [SerializeField] SpriteRenderer arrowGFX;
     [SerializeField] Slider cooldownFire;
+    [SerializeField] Slider bowPowerSlider;
     [SerializeField] float launchForce = 1.5f;
     [SerializeField] float trajectoryTimeStep = 0.05f;
     [SerializeField] int trajectoryStepCount = 15;
     [SerializeField] float fireRate = 3f;
     [SerializeField] float nextFire;
+    [SerializeField] public float arrowDamageUpgrade;
     [Range(0, 5)][SerializeField] float maxBowCharge;
     Vector2 velocity, startMousePos, currentMousePos;
-    float bowCharge;
+    public float bowCharge;
     bool isCharge = true;
 
     void Start()
     {
         cooldownFire.value = 0f;
         cooldownFire.maxValue = fireRate;
+
+        bowPowerSlider.value = 0f;
+        bowPowerSlider.maxValue = maxBowCharge;
     }
 
     // Update is called once per frame
@@ -52,6 +57,7 @@ public class Launcher : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
+            isCharge = false;
             ClearTrajectory();
         }
 
@@ -64,15 +70,14 @@ public class Launcher : MonoBehaviour
             else
             {
                 bowCharge = 0f;
-                isCharge = true;
             }
+            bowPowerSlider.value = bowCharge;
         }
 
         if (Time.time > nextFire)
         {
             if (Input.GetMouseButtonUp(0))
             {
-                isCharge = false;
                 nextFire = Time.time + fireRate;
                 FireProjectile();
             }
@@ -81,9 +86,11 @@ public class Launcher : MonoBehaviour
         if (cooldownFire.value > 0f)
         {
             cooldownFire.value -= 1f * Time.deltaTime;
-
-            if (cooldownFire.value <= 0f)
-                cooldownFire.value = 0f;
+        }
+        else
+        {
+            cooldownFire.value = 0f;
+            isCharge = true;
         }
     }
 
@@ -105,7 +112,17 @@ public class Launcher : MonoBehaviour
 
     void ChargeBow()
     {
-        bowCharge += Time.deltaTime;
+        bowPowerSlider.value = bowCharge;
+
+        if (bowCharge <= maxBowCharge)
+        {
+            bowCharge += Time.deltaTime;
+        }
+        else
+        {
+            bowCharge = maxBowCharge;
+            bowPowerSlider.value = maxBowCharge;
+        }
     }
 
     void RotateLauncher()
@@ -128,7 +145,7 @@ public class Launcher : MonoBehaviour
         pr.GetComponent<Rigidbody2D>().velocity = velocity;
         Projectile projectileDamage = pr.GetComponent<Projectile>();
 
-        float projectileTotalDamage = bowCharge * projectileDamage.arrowDamage;
+        float projectileTotalDamage = bowCharge * (projectileDamage.arrowDamage + arrowDamageUpgrade);
         projectileDamage.arrowTotalDamage = projectileTotalDamage;
     }
 

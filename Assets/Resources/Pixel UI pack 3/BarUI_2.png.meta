@@ -126,19 +126,19 @@ TextureImporter:
       name: BarUI_2_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 2890
-        width: 5632
-        height: 538
+        x: 40
+        y: 2869
+        width: 5621
+        height: 539
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c5aa7940a1e7ec4b9ec2657f21450c6
-      internalID: -158271112
+      spriteID: 73bcebd0b32f8d14e8571a2d60d2a53f
+      internalID: -587175136
       vertices: []
       indices: 
       edges: []
@@ -147,19 +147,19 @@ TextureImporter:
       name: BarUI_2_1
       rect:
         serializedVersion: 2
-        x: 51
-        y: 1454
-        width: 5626
-        height: 562
+        x: 38
+        y: 1933
+        width: 5621
+        height: 538
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5f0a699a171fd44b84dff546048dfe2
-      internalID: 1745745092
+      spriteID: e0ac6aeee97f52345a289481727211ee
+      internalID: -1826962
       vertices: []
       indices: 
       edges: []
@@ -168,19 +168,40 @@ TextureImporter:
       name: BarUI_2_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 5716
-        height: 641
+        x: 41
+        y: 997
+        width: 5618
+        height: 538
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 586f96a598a218a43bd634a7cd233f14
-      internalID: -1771841661
+      spriteID: 7e91255942080ab458113e6494aa8a4c
+      internalID: 1791063255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BarUI_2_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 5720
+        height: 641
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4dc5bc367972da4188866817cc31889
+      internalID: -112490157
       vertices: []
       indices: 
       edges: []
@@ -188,7 +209,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 88b4208fc8eba014f81a022a510102b7
+    spriteID: df76a74a968862641a91dc030ea6b2c8
     internalID: 0
     vertices: []
     indices: 
@@ -196,9 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BarUI_2_0: -158271112
-      BarUI_2_1: 1745745092
-      BarUI_2_2: -1771841661
+      BarUI_2_0: -587175136
+      BarUI_2_1: -1826962
+      BarUI_2_2: 1791063255
+      BarUI_2_3: -112490157
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
