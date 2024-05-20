@@ -10,12 +10,12 @@ public class Launcher : MonoBehaviour
     [SerializeField] Transform spawnPoint;
     [SerializeField] LineRenderer lineRenderer;
     [SerializeField] SpriteRenderer arrowGFX;
-    [SerializeField] Slider cooldownFire;
+    [SerializeField] public Slider cooldownFire;
     [SerializeField] Slider bowPowerSlider;
     [SerializeField] float launchForce = 1.5f;
     [SerializeField] float trajectoryTimeStep = 0.05f;
     [SerializeField] int trajectoryStepCount = 15;
-    [SerializeField] float fireRate = 3f;
+    [SerializeField] public float fireRate = 3f;
     [SerializeField] float nextFire;
     [SerializeField] public float arrowDamageUpgrade;
     [Range(0, 5)][SerializeField] float maxBowCharge;
@@ -32,10 +32,10 @@ public class Launcher : MonoBehaviour
         bowPowerSlider.maxValue = maxBowCharge;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 screenPosDepth = Input.mousePosition;
+
         // Give it a depth. Maybe a raycast depth, maybe a clipping plane...
         screenPosDepth.z = 10f;
 
@@ -61,19 +61,6 @@ public class Launcher : MonoBehaviour
             ClearTrajectory();
         }
 
-        if (!isCharge)
-        {
-            if (bowCharge > 0f)
-            {
-                bowCharge -= 1f * Time.deltaTime;
-            }
-            else
-            {
-                bowCharge = 0f;
-            }
-            bowPowerSlider.value = bowCharge;
-        }
-
         if (Time.time > nextFire)
         {
             if (Input.GetMouseButtonUp(0))
@@ -81,6 +68,21 @@ public class Launcher : MonoBehaviour
                 nextFire = Time.time + fireRate;
                 FireProjectile();
             }
+        }
+
+        if (!isCharge)
+        {
+            // if (bowCharge > 0f)
+            // {
+            // bowCharge -= 1f * Time.deltaTime;
+            bowCharge = 0f;
+
+            // }
+            // else
+            // {
+            //     bowCharge = 0f;
+            // }
+            bowPowerSlider.value = bowCharge;
         }
 
         if (cooldownFire.value > 0f)
@@ -114,7 +116,7 @@ public class Launcher : MonoBehaviour
     {
         bowPowerSlider.value = bowCharge;
 
-        if (bowCharge <= maxBowCharge)
+        if (bowCharge < maxBowCharge)
         {
             bowCharge += Time.deltaTime;
         }
