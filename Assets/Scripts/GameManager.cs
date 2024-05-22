@@ -1,4 +1,5 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,12 +9,18 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [SerializeField] public bool timeIsRunning;
     [SerializeField] public int gemsCount;
+    [SerializeField] int roundInfo;
     [SerializeField] float setTimeRound;
     [SerializeField] float timeRemaining;
     [SerializeField] TMP_Text gemsText;
     [SerializeField] TMP_Text timeText;
+    [SerializeField] TMP_Text roundText;
     [SerializeField] Launcher launcher;
     [SerializeField] GameObject upgradeUI;
+    [SerializeField] GameObject[] lowEnemySpawner;
+    [SerializeField] GameObject[] mediumEnemySpawner;
+    [SerializeField] GameObject[] highEnemySpawner;
+    [SerializeField] GameObject[] bossSpawner;
 
     void Awake()
     {
@@ -21,6 +28,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+        roundInfo = 1;
     }
 
     void Start()
@@ -80,7 +88,35 @@ public class GameManager : MonoBehaviour
 
     public void NextRound()
     {
+        roundInfo += 1;
+        roundText.text = roundInfo.ToString();
         timeRemaining = setTimeRound;
         timeIsRunning = true;
+        ActiveSpawner(roundInfo);
+    }
+
+    void ActiveSpawner(int idx)
+    {
+        var randomLowMed = Random.Range(0, 2);
+
+        if (idx > 1)
+        {
+            lowEnemySpawner[randomLowMed].SetActive(true);
+        }
+        // else if (idx == 5)
+        // {
+        //     lowEnemySpawner[randomLowMed].SetActive(false);
+
+        //     bossSpawner[0].SetActive(true);
+        // }
+        // else if (idx > 5)
+        // {
+        //     bossSpawner[0].SetActive(false);
+
+        //     lowEnemySpawner[randomLowMed].SetActive(false);
+        //     lowEnemySpawner[randomLowMed].SetActive(true);
+
+        //     mediumEnemySpawner[randomLowMed].SetActive(true);
+        // }
     }
 }

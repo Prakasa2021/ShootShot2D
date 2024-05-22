@@ -7,6 +7,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject enemyPref;
     [SerializeField] float minSpawnTime;
     [SerializeField] float maxSpawnTime;
+    [SerializeField] int posX;
+    [SerializeField] int posY;
+    [SerializeField] int randomY1;
+    [SerializeField] int randomY2;
+    [SerializeField] bool isRandom;
     private float timeTilSpawn;
     private GameManager gameManager;
 
@@ -26,8 +31,16 @@ public class EnemySpawner : MonoBehaviour
         {
             if (timeTilSpawn <= 0)
             {
-                Instantiate(enemyPref, transform.position, Quaternion.identity);
-                SetTimeUntilSpawn();
+                if (!isRandom)
+                {
+                    Instantiate(enemyPref, new Vector3(posX, posY, 0), Quaternion.identity);
+                    SetTimeUntilSpawn();
+                }
+                else
+                {
+                    Instantiate(enemyPref, new Vector3(posX, Random.Range(randomY1, randomY2), 0), Quaternion.identity);
+                    SetTimeUntilSpawn();
+                }
             }
         }
     }

@@ -18,10 +18,11 @@ public class Launcher : MonoBehaviour
     [SerializeField] public float fireRate = 3f;
     [SerializeField] float nextFire;
     [SerializeField] public float arrowDamageUpgrade;
+    [SerializeField] public float chargeSpeed;
     [Range(0, 5)][SerializeField] float maxBowCharge;
+    [SerializeField] float bowCharge;
+    [SerializeField] bool isCharge = true;
     Vector2 velocity, startMousePos, currentMousePos;
-    public float bowCharge;
-    bool isCharge = true;
 
     void Start()
     {
@@ -118,7 +119,7 @@ public class Launcher : MonoBehaviour
 
         if (bowCharge < maxBowCharge)
         {
-            bowCharge += Time.deltaTime;
+            bowCharge += Time.deltaTime * chargeSpeed;
         }
         else
         {
