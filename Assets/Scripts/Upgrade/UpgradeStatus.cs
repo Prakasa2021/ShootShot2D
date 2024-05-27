@@ -14,18 +14,28 @@ public class UpgradeStatus : MonoBehaviour
     [SerializeField] int costDamageUp;
     [SerializeField] Button atkDamageButton;
     [SerializeField] TMP_Text costDamageText;
+    [SerializeField] int addCostDamage;
 
     [Header("Cooldown Upgrade")]
     [SerializeField] float cooldownUp;
     [SerializeField] int costCooldownUp;
     [SerializeField] Button cdSpeedButton;
     [SerializeField] TMP_Text costCooldownText;
+    [SerializeField] int addCostCooldown;
+
+    [Header("Charge Speed Upgrade")]
+    [SerializeField] float chargeSpeedUp;
+    [SerializeField] int costChargeSpeedUp;
+    [SerializeField] Button chargeSpeedButton;
+    [SerializeField] TMP_Text costChargeSpeedText;
+    [SerializeField] int addCostChargeSpeed;
 
     void Start()
     {
         gameManager = GameManager.instance;
         costDamageText.text = costDamageUp.ToString();
         costCooldownText.text = costCooldownUp.ToString();
+        costChargeSpeedText.text = costChargeSpeedUp.ToString();
     }
 
     void Update()
@@ -40,6 +50,11 @@ public class UpgradeStatus : MonoBehaviour
             cdSpeedButton.interactable = false;
         else
             cdSpeedButton.interactable = true;
+
+        if (gameManager.gemsCount < costChargeSpeedUp)
+            chargeSpeedButton.interactable = false;
+        else
+            chargeSpeedButton.interactable = true;
     }
 
     public void UpgradeAttackDamage()
@@ -50,7 +65,7 @@ public class UpgradeStatus : MonoBehaviour
         {
             gameManager.GemsCount(-costDamageUp);
             launcher.arrowDamageUpgrade += damageUp;
-            costDamageUp += 30;
+            costDamageUp += addCostDamage;
             costDamageText.text = costDamageUp.ToString();
         }
     }
@@ -63,9 +78,22 @@ public class UpgradeStatus : MonoBehaviour
         {
             gameManager.GemsCount(-costCooldownUp);
             launcher.fireRate -= cooldownUp;
-            costCooldownUp += 30;
+            costCooldownUp += addCostCooldown;
             costCooldownText.text = costCooldownUp.ToString();
             launcher.cooldownFire.maxValue = launcher.fireRate;
+        }
+    }
+
+    public void UpgradeChargeSpeed()
+    {
+        var currentGems = gameManager.gemsCount;
+
+        if (currentGems >= costChargeSpeedUp)
+        {
+            gameManager.GemsCount(-costChargeSpeedUp);
+            launcher.chargeSpeed += chargeSpeedUp;
+            costChargeSpeedUp += addCostChargeSpeed;
+            costChargeSpeedText.text = costChargeSpeedUp.ToString();
         }
     }
 }

@@ -97,26 +97,21 @@ public class GameManager : MonoBehaviour
 
     void ActiveSpawner(int idx)
     {
-        var randomLowMed = Random.Range(0, 2);
+        var randomLow = Random.Range(0, 2);
+        var randomMed = Random.Range(0, 2);
+        var randomHigh = Random.Range(0, 2);
 
-        if (idx > 1)
+        if (idx % 5 != 0 && idx < 5)
         {
-            lowEnemySpawner[randomLowMed].SetActive(true);
+            lowEnemySpawner[randomLow].SetActive(true);
         }
-        // else if (idx == 5)
+        // else if (idx % 5 == 0)
         // {
-        //     lowEnemySpawner[randomLowMed].SetActive(false);
 
-        //     bossSpawner[0].SetActive(true);
         // }
-        // else if (idx > 5)
+        // else if (idx % 5 != 0 && idx > 5)
         // {
-        //     bossSpawner[0].SetActive(false);
 
-        //     lowEnemySpawner[randomLowMed].SetActive(false);
-        //     lowEnemySpawner[randomLowMed].SetActive(true);
-
-        //     mediumEnemySpawner[randomLowMed].SetActive(true);
         // }
     }
 }

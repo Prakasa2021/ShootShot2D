@@ -584,7 +584,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 158936797}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1069502410}
+        m_TargetAssemblyTypeName: UpgradeStatus, Assembly-CSharp
+        m_MethodName: UpgradeChargeSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &158936797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2575,10 +2587,17 @@ MonoBehaviour:
   costDamageUp: 30
   atkDamageButton: {fileID: 158393066}
   costDamageText: {fileID: 1440537154}
+  addCostDamage: 20
   cooldownUp: 0.2
   costCooldownUp: 40
   cdSpeedButton: {fileID: 981713888}
   costCooldownText: {fileID: 1017966966}
+  addCostCooldown: 15
+  chargeSpeedUp: 0.5
+  costChargeSpeedUp: 60
+  chargeSpeedButton: {fileID: 158936796}
+  costChargeSpeedText: {fileID: 592601685}
+  addCostChargeSpeed: 30
 --- !u!1 &1094757248
 GameObject:
   m_ObjectHideFlags: 0
@@ -3414,7 +3433,7 @@ GameObject:
   - component: {fileID: 1374345535}
   - component: {fileID: 1374345536}
   m_Layer: 5
-  m_Name: AttackDMG
+  m_Name: AttackDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3556,7 +3575,7 @@ GameObject:
   - component: {fileID: 1411591413}
   - component: {fileID: 1411591414}
   m_Layer: 5
-  m_Name: AttackCD
+  m_Name: Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4375,7 +4394,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Coming Soon!
+  m_text: Charge Speed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4660,7 +4679,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cooldown Speed
+  m_text: Cooldown
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5203,7 +5222,7 @@ GameObject:
   - component: {fileID: 2086871005}
   - component: {fileID: 2086871006}
   m_Layer: 5
-  m_Name: AttackDmg (2)
+  m_Name: ChargeSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
