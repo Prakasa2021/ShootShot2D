@@ -16,6 +16,7 @@ public class Launcher : MonoBehaviour
     [SerializeField] float trajectoryTimeStep = 0.05f;
     [SerializeField] int trajectoryStepCount = 15;
     [SerializeField] public float fireRate = 3f;
+    [SerializeField] public float fireRateSpeed;
     [SerializeField] float nextFire;
     [SerializeField] public float arrowDamageUpgrade;
     [SerializeField] public float chargeSpeed;
@@ -88,7 +89,7 @@ public class Launcher : MonoBehaviour
 
         if (cooldownFire.value > 0f)
         {
-            cooldownFire.value -= 1f * Time.deltaTime;
+            cooldownFire.value -= fireRateSpeed * Time.deltaTime;
         }
         else
         {

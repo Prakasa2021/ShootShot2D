@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] float health = 0f;
-    [SerializeField] float maxHealth = 100f;
-    [SerializeField] Slider healthBar;
+    [SerializeField] float health;
+    [SerializeField] public float maxHealth;
+    [SerializeField] public Slider healthBar;
 
     // Start is called before the first frame update
     void Start()
@@ -34,13 +34,12 @@ public class Health : MonoBehaviour
         else if (health <= 0f)
         {
             health = 0f;
-            healthBar.value = health;
+            // healthBar.value = health;
         }
     }
 
     void OnGUI()
     {
-        float t = Time.deltaTime / 1f;
-        healthBar.value = Mathf.Lerp(healthBar.value, health, t);
+        healthBar.value = Mathf.Lerp(healthBar.value, health, Time.deltaTime / 1f);
     }
 }

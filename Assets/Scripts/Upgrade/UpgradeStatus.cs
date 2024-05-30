@@ -8,6 +8,7 @@ public class UpgradeStatus : MonoBehaviour
 {
     private GameManager gameManager;
     [SerializeField] Launcher launcher;
+    [SerializeField] Health health;
 
     [Header("Damage Upgrade")]
     [SerializeField] float damageUp;
@@ -30,12 +31,20 @@ public class UpgradeStatus : MonoBehaviour
     [SerializeField] TMP_Text costChargeSpeedText;
     [SerializeField] int addCostChargeSpeed;
 
+    [Header("Charge Speed Upgrade")]
+    [SerializeField] float maxHealthUp;
+    [SerializeField] int costMaxHealthUp;
+    [SerializeField] Button maxHealthButton;
+    [SerializeField] TMP_Text costMaxHealthText;
+    [SerializeField] int addCostMaxHealth;
+
     void Start()
     {
         gameManager = GameManager.instance;
         costDamageText.text = costDamageUp.ToString();
         costCooldownText.text = costCooldownUp.ToString();
         costChargeSpeedText.text = costChargeSpeedUp.ToString();
+        costMaxHealthText.text = costMaxHealthUp.ToString();
     }
 
     void Update()
@@ -55,6 +64,11 @@ public class UpgradeStatus : MonoBehaviour
             chargeSpeedButton.interactable = false;
         else
             chargeSpeedButton.interactable = true;
+
+        if (gameManager.gemsCount < costMaxHealthUp)
+            maxHealthButton.interactable = false;
+        else
+            maxHealthButton.interactable = true;
     }
 
     public void UpgradeAttackDamage()
@@ -77,10 +91,9 @@ public class UpgradeStatus : MonoBehaviour
         if (currentGems >= costCooldownUp)
         {
             gameManager.GemsCount(-costCooldownUp);
-            launcher.fireRate -= cooldownUp;
+            launcher.fireRateSpeed += cooldownUp;
             costCooldownUp += addCostCooldown;
             costCooldownText.text = costCooldownUp.ToString();
-            launcher.cooldownFire.maxValue = launcher.fireRate;
         }
     }
 
@@ -94,6 +107,20 @@ public class UpgradeStatus : MonoBehaviour
             launcher.chargeSpeed += chargeSpeedUp;
             costChargeSpeedUp += addCostChargeSpeed;
             costChargeSpeedText.text = costChargeSpeedUp.ToString();
+        }
+    }
+
+    public void UpgradeMaxHealth()
+    {
+        var currentGems = gameManager.gemsCount;
+
+        if (currentGems >= costMaxHealthUp)
+        {
+            gameManager.GemsCount(-costMaxHealthUp);
+            health.maxHealth += maxHealthUp;
+            costMaxHealthUp += addCostMaxHealth;
+            costMaxHealthText.text = costMaxHealthUp.ToString();
+            health.healthBar.maxValue = health.maxHealth;
         }
     }
 }
