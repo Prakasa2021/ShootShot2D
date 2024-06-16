@@ -30,7 +30,11 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         // Menggerakkan objek ke depan berdasarkan arah hadapannya
-        transform.Translate(speed * Time.deltaTime * Vector2.left);
+        if (!transform.parent)
+            transform.Translate(speed * Time.deltaTime * Vector2.left);
+        else
+            transform.parent.Translate(speed * Time.deltaTime * Vector2.left);
+
     }
 
     public void TakeDamage(float dmg)

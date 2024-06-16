@@ -5,48 +5,58 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject enemyPref;
+    [SerializeField] int currentEnemySpawn;
+    [SerializeField] int targetEnemySpawn;
     [SerializeField] float minSpawnTime;
     [SerializeField] float maxSpawnTime;
-    [SerializeField] int posX;
-    [SerializeField] int posY;
-    [SerializeField] int randomY1;
-    [SerializeField] int randomY2;
-    [SerializeField] bool isRandom;
-    private float timeTilSpawn;
+    [SerializeField] float posX;
+    [SerializeField] float posY;
+    [SerializeField] float randomY1;
+    [SerializeField] float randomY2;
+    [SerializeField] bool isRandomPos;
+    private float timeUntilSpawn;
     private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameManager.instance;
-        SetTimeUntilSpawn();
+        SetTimeSpawn();
+    }
+
+    void SetTimeSpawn()
+    {
+        timeUntilSpawn = Random.Range(minSpawnTime, maxSpawnTime);
     }
 
     // Update is called once per frame
     void Update()
     {
-        timeTilSpawn -= Time.deltaTime;
-
         if (gameManager.timeIsRunning)
         {
-            if (timeTilSpawn <= 0)
+            timeUntilSpawn -= Time.deltaTime;
+
+            if (timeUntilSpawn <= 0)
             {
-                if (!isRandom)
-                {
-                    Instantiate(enemyPref, new Vector3(posX, posY, 0), Quaternion.identity);
-                    SetTimeUntilSpawn();
-                }
-                else
-                {
-                    Instantiate(enemyPref, new Vector3(posX, Random.Range(randomY1, randomY2), 0), Quaternion.identity);
-                    SetTimeUntilSpawn();
-                }
+                SpawnEnemy();
+                SetTimeSpawn();
             }
         }
     }
 
-    void SetTimeUntilSpawn()
+    void SpawnEnemy()
     {
-        timeTilSpawn = Random.Range(minSpawnTime, maxSpawnTime);
+        if (currentEnemySpawn < targetEnemySpawn)
+        {
+            if (!isRandomPos)
+            {
+                Instantiate(enemyPref, new Vector3(posX, posY, 0), Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(enemyPref, new Vector3(posX, Random.Range(randomY1, randomY2), 0), Quaternion.identity);
+            }
+            currentEnemySpawn += 1;
+        }
     }
 }

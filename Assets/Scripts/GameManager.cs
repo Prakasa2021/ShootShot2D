@@ -105,10 +105,14 @@ public class GameManager : MonoBehaviour
         {
             lowEnemySpawner[randomLow].SetActive(true);
         }
-        // else if (idx % 5 == 0)
-        // {
-
-        // }
+        else if (idx % 5 == 0)
+        {
+            foreach (var lowEnemy in lowEnemySpawner)
+            {
+                lowEnemy.SetActive(false);
+            }
+            bossSpawner[0].SetActive(true);
+        }
         // else if (idx % 5 != 0 && idx > 5)
         // {
 
