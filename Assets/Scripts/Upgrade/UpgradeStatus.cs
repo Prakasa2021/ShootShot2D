@@ -11,6 +11,7 @@ public class UpgradeStatus : MonoBehaviour
     [SerializeField] Health health;
 
     [Header("Damage Upgrade")]
+    [SerializeField] int damageLevel;
     [SerializeField] float damageUp;
     [SerializeField] int costDamageUp;
     [SerializeField] Button atkDamageButton;
@@ -18,6 +19,7 @@ public class UpgradeStatus : MonoBehaviour
     [SerializeField] int addCostDamage;
 
     [Header("Cooldown Upgrade")]
+    [SerializeField] int cooldownLevel;
     [SerializeField] float cooldownUp;
     [SerializeField] int costCooldownUp;
     [SerializeField] Button cdSpeedButton;
@@ -25,13 +27,15 @@ public class UpgradeStatus : MonoBehaviour
     [SerializeField] int addCostCooldown;
 
     [Header("Charge Speed Upgrade")]
+    [SerializeField] int chargeLevel;
     [SerializeField] float chargeSpeedUp;
     [SerializeField] int costChargeSpeedUp;
     [SerializeField] Button chargeSpeedButton;
     [SerializeField] TMP_Text costChargeSpeedText;
     [SerializeField] int addCostChargeSpeed;
 
-    [Header("Charge Speed Upgrade")]
+    [Header("Health Upgrade")]
+    [SerializeField] int healthLevel;
     [SerializeField] float maxHealthUp;
     [SerializeField] int costMaxHealthUp;
     [SerializeField] Button maxHealthButton;
@@ -49,26 +53,26 @@ public class UpgradeStatus : MonoBehaviour
 
     void Update()
     {
-        // Butuh efisiensi interact button
-        if (gameManager.gemsCount < costDamageUp)
-            atkDamageButton.interactable = false;
-        else
+        // Butuh script simple interact button
+        if (gameManager.gemsCount >= costDamageUp && damageLevel <= 10)
             atkDamageButton.interactable = true;
-
-        if (gameManager.gemsCount < costCooldownUp)
-            cdSpeedButton.interactable = false;
         else
+            atkDamageButton.interactable = false;
+
+        if (gameManager.gemsCount >= costCooldownUp && cooldownLevel <= 10)
             cdSpeedButton.interactable = true;
-
-        if (gameManager.gemsCount < costChargeSpeedUp)
-            chargeSpeedButton.interactable = false;
         else
+            cdSpeedButton.interactable = false;
+
+        if (gameManager.gemsCount >= costChargeSpeedUp && chargeLevel <= 10)
             chargeSpeedButton.interactable = true;
-
-        if (gameManager.gemsCount < costMaxHealthUp)
-            maxHealthButton.interactable = false;
         else
+            chargeSpeedButton.interactable = false;
+
+        if (gameManager.gemsCount >= costMaxHealthUp && healthLevel <= 10)
             maxHealthButton.interactable = true;
+        else
+            maxHealthButton.interactable = false;
     }
 
     public void UpgradeAttackDamage()
@@ -82,6 +86,7 @@ public class UpgradeStatus : MonoBehaviour
             costDamageUp += addCostDamage;
             costDamageText.text = costDamageUp.ToString();
         }
+        damageLevel += 1;
     }
 
     public void UpgradeCooldownSpeed()
@@ -95,6 +100,7 @@ public class UpgradeStatus : MonoBehaviour
             costCooldownUp += addCostCooldown;
             costCooldownText.text = costCooldownUp.ToString();
         }
+        cooldownLevel += 1;
     }
 
     public void UpgradeChargeSpeed()
@@ -108,6 +114,7 @@ public class UpgradeStatus : MonoBehaviour
             costChargeSpeedUp += addCostChargeSpeed;
             costChargeSpeedText.text = costChargeSpeedUp.ToString();
         }
+        chargeLevel += 1;
     }
 
     public void UpgradeMaxHealth()
@@ -122,5 +129,6 @@ public class UpgradeStatus : MonoBehaviour
             costMaxHealthText.text = costMaxHealthUp.ToString();
             health.healthBar.maxValue = health.maxHealth;
         }
+        healthLevel += 1;
     }
 }

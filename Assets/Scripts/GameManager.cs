@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [SerializeField] public bool timeIsRunning;
     [SerializeField] public int gemsCount;
-    [SerializeField] int roundInfo;
+    [SerializeField] public int roundInfo;
     [SerializeField] float setTimeRound;
     [SerializeField] float timeRemaining;
     [SerializeField] TMP_Text gemsText;
@@ -101,11 +101,11 @@ public class GameManager : MonoBehaviour
         var randomMed = Random.Range(0, 2);
         var randomHigh = Random.Range(0, 2);
 
-        if (idx % 5 != 0 && idx < 5)
+        if (idx < 5)
         {
             lowEnemySpawner[randomLow].SetActive(true);
         }
-        else if (idx % 5 == 0)
+        else if (idx == 5)
         {
             foreach (var lowEnemy in lowEnemySpawner)
             {

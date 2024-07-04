@@ -42,6 +42,8 @@ public class EnemySpawner : MonoBehaviour
                 SetTimeSpawn();
             }
         }
+        else
+            currentEnemySpawn = 0;
     }
 
     void SpawnEnemy()

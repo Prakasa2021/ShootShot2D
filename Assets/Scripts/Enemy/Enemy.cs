@@ -47,7 +47,11 @@ public class Enemy : MonoBehaviour
         {
             gameManager.GemsCount(enemyValue);
             enemyHealth = 0;
+
             Destroy(gameObject);
+
+            if (transform.parent)
+                Destroy(transform.parent.gameObject);
         }
     }
 
