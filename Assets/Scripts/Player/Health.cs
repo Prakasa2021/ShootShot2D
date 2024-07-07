@@ -17,12 +17,6 @@ public class Health : MonoBehaviour
         healthBar.maxValue = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void UpdateHealth(float mod)
     {
         health += mod;

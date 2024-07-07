@@ -151,7 +151,7 @@ MonoBehaviour:
   canAttack: 0
   transparencyDuration: 0.2
   transparencyAmount: 0.5
-  enemyValue: 5
+  enemyValue: 4
 --- !u!1 &8109552845080039879
 GameObject:
   m_ObjectHideFlags: 0

@@ -201,4 +201,4 @@ MonoBehaviour:
   canAttack: 0
   transparencyDuration: 0.2
   transparencyAmount: 0.5
-  enemyValue: 15
+  enemyValue: 9
