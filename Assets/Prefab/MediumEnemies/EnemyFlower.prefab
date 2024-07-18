@@ -429,6 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1950720097101948379}
+  spriteRenderer: {fileID: 8422276863966101264}
   bulletPrefab: {fileID: 4361348174081773202, guid: 21ad89c62bc4bdd47be376b43ad04dd7, type: 3}
   spawnPoint: {fileID: 5083124256799561680}
   bulletSpeed: 5
@@ -442,6 +443,7 @@ MonoBehaviour:
   transparencyDuration: 0.2
   transparencyAmount: 0.5
   enemyValue: 12
+  isUseWalkTime: 1
 --- !u!1 &8422276864114123490
 GameObject:
   m_ObjectHideFlags: 0

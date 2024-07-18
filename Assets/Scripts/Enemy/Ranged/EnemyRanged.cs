@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyRanged : MonoBehaviour
 {
     [SerializeField] Animator animator;
+    [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] GameObject bulletPrefab; // The bullet prefab to be spawned
     [SerializeField] Transform spawnPoint; // The point from which the bullet will be spawned
     [SerializeField] float bulletSpeed; // The speed at which the bullet will be shot
@@ -18,7 +19,7 @@ public class EnemyRanged : MonoBehaviour
     [SerializeField] float transparencyDuration = 1f; // Duration of transparency effect in seconds
     [SerializeField] float transparencyAmount = 0.5f; // Transparency amount (0 = fully transparent, 1 = fully opaque)
     [SerializeField] int enemyValue;
-    SpriteRenderer spriteRenderer;
+    [SerializeField] bool isUseWalkTime;
     Color originalColor; // Original color of the sprite
     private GameManager gameManager;
     private float walkTime;
@@ -27,7 +28,6 @@ public class EnemyRanged : MonoBehaviour
     void Start()
     {
         enemyHealth = enemyMaxHealth;
-        spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color; // Store the original color of the sprite
         gameManager = GameManager.instance;
         randomTime = Random.Range(walkTimeBegin, walkTimeTarget);
@@ -39,29 +39,44 @@ public class EnemyRanged : MonoBehaviour
         Transform targetTransform = transform.parent ? transform.parent : transform;
         walkTime += Time.deltaTime;
 
-        if (walkTime < randomTime)
+        if (isUseWalkTime)
         {
-            PlayWalkAnimation();
-
-            targetTransform.Translate(speed * Time.deltaTime * Vector2.left);
-        }
-        else
-        {
-            StopWalkAnimation();
-
-            if (attackSpeed <= canAttack)
+            if (walkTime < randomTime)
             {
-                PlayAttackAnimation();
+                PlayWalkAnimation();
 
-                SpawnBullet();
-
-                canAttack = 0f;
+                targetTransform.Translate(speed * Time.deltaTime * Vector2.left);
             }
             else
             {
-                canAttack += Time.deltaTime;
+                StopWalkAnimation();
+
+                if (attackSpeed <= canAttack)
+                {
+                    PlayAttackAnimation();
+
+                    SpawnBullet();
+
+                    canAttack = 0f;
+                }
+                else
+                {
+                    canAttack += Time.deltaTime;
+                }
             }
         }
+        else
+        {
+            Movement();
+        }
+    }
+
+    void Movement()
+    {
+        if (!transform.parent)
+            transform.Translate(speed * Time.deltaTime * Vector2.left);
+        else
+            transform.parent.Translate(speed * Time.deltaTime * Vector2.left);
     }
 
     void PlayWalkAnimation()

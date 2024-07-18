@@ -193,9 +193,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490319b31ac51f84a8cbaaca121eab01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  spriteRenderer: {fileID: 6298974487636055839}
   enemyHealth: 0
   enemyMaxHealth: 16
-  enemyDamage: 6
+  minEnemyDamage: 8
+  maxEnemyDamage: 12
   speed: 0.5
   attackSpeed: 1.5
   canAttack: 0
