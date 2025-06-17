@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -28,14 +29,15 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
-        roundInfo = 1;
+        roundInfo = 0;
     }
 
     void Start()
     {
-        timeIsRunning = true;
         upgradeUI.SetActive(false);
         timeRemaining = setTimeRound;
+        timeIsRunning = true;
+        NextRound();
     }
 
     void Update()
@@ -95,43 +97,89 @@ public class GameManager : MonoBehaviour
         ActiveSpawner(roundInfo);
     }
 
-    void ActiveSpawner(int idx)
+    void ActiveSpawner(int round)
     {
-        var randomLow = Random.Range(0, 2);
-        var randomMed = Random.Range(0, 2);
-        var randomHigh = Random.Range(0, 2);
+        var randomLow = Random.Range(0, lowEnemySpawner.Length);
+        var randomMed = Random.Range(0, mediumEnemySpawner.Length);
+        var randomHigh = Random.Range(0, highEnemySpawner.Length);
+        var randomBoss = Random.Range(0, bossSpawner.Length);
 
-        if (idx < 5)
+        if (round < 5)
         {
             lowEnemySpawner[randomLow].SetActive(true);
         }
-        else if (idx == 5)
+        else if (round % 5 == 0)
         {
-            // foreach (var lowEnemy in lowEnemySpawner)
-            // {
-            //     lowEnemy.SetActive(false);
-            // }
-            bossSpawner[0].SetActive(true);
+            bossSpawner[randomBoss].SetActive(true);
         }
-        else if (idx > 5)
+        else if (round > 5)
         {
-            bossSpawner[0].SetActive(false);
-
-            foreach (var lowEnemy in lowEnemySpawner)
-            {
-                lowEnemy.SetActive(false);
-            }
-
-            lowEnemySpawner[randomLow].SetActive(true);
             mediumEnemySpawner[randomMed].SetActive(true);
         }
-        else if (idx == 10)
+        else if (round > 10)
         {
-            bossSpawner[1].SetActive(false);
+            highEnemySpawner[randomHigh].SetActive(true);
         }
-        else if (idx > 10)
+        else if (round > 20)
         {
+            for (int i = 0; i < lowEnemySpawner.Length; i++)
+            {
+                lowEnemySpawner[i].SetActive(true);
+                mediumEnemySpawner[i].SetActive(true);
+                highEnemySpawner[i].SetActive(true);
+            }
+        }
 
+        if (round % 5 != 0)
+        {
+            foreach (var boss in bossSpawner)
+            {
+                boss.SetActive(false);
+            }
         }
+
+        // if (round < 5)
+        // {
+        //     lowEnemySpawner[randomLow].SetActive(true);
+        // }
+        // else if (round == 5)
+        // {
+        //     // foreach (var lowEnemy in lowEnemySpawner)
+        //     // {
+        //     //     lowEnemy.SetActive(false);
+        //     // }
+        //     bossSpawner[0].SetActive(true);
+        // }
+        // else if (round > 5)
+        // {
+        //     bossSpawner[0].SetActive(false);
+
+        //     foreach (var lowEnemy in lowEnemySpawner)
+        //     {
+        //         lowEnemy.SetActive(false);
+        //     }
+
+        //     lowEnemySpawner[randomLow].SetActive(true);
+        //     mediumEnemySpawner[randomMed].SetActive(true);
+        // }
+        // else if (round == 10)
+        // {
+        //     bossSpawner[1].SetActive(false);
+        // }
+        // else if (round > 10)
+        // {
+
+        // }
+    }
+
+    public void RestartGame()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
+    }
+
+    public void EndGame()
+    {
+        timeIsRunning = false;
     }
 }

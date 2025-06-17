@@ -23,7 +23,9 @@ public class Launcher : MonoBehaviour
     [Range(0, 5)][SerializeField] float maxBowCharge;
     [SerializeField] float bowCharge;
     [SerializeField] bool isCharge = true;
-    Vector2 velocity, startMousePos, currentMousePos;
+    private Vector3 screenPosDepth;
+    private Vector2 velocity, startMousePos, currentMousePos;
+    private bool isTouching;
 
     void Start()
     {
@@ -32,43 +34,119 @@ public class Launcher : MonoBehaviour
 
         bowPowerSlider.value = 0f;
         bowPowerSlider.maxValue = maxBowCharge;
+
+        ClearTrajectory();
     }
 
     void Update()
     {
-        Vector3 screenPosDepth = Input.mousePosition;
+        // Vector3 screenPosDepth = Input.mousePosition;
 
-        // Give it a depth. Maybe a raycast depth, maybe a clipping plane...
-        screenPosDepth.z = 10f;
+        // // Give it a depth. Maybe a raycast depth, maybe a clipping plane...
+        // screenPosDepth.z = 10f;
 
-        if (Input.GetMouseButtonDown(0))
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     startMousePos = Camera.main.ScreenToWorldPoint(screenPosDepth);
+        // }
+        // else if (Input.GetMouseButton(0))
+        // {
+        //     if (isCharge)
+        //         ChargeBow();
+
+        //     arrowGFX.enabled = true;
+        //     currentMousePos = Camera.main.ScreenToWorldPoint(screenPosDepth);
+        //     velocity = (startMousePos - currentMousePos) * launchForce;
+
+        //     RotateLauncher();
+        //     DrawTrajectory();
+        // }
+        // else if (Input.GetMouseButtonUp(0))
+        // {
+        //     isCharge = false;
+        //     ClearTrajectory();
+        // }
+
+        // if (Time.time > nextFire)
+        // {
+        //     if (Input.GetMouseButtonUp(0))
+        //     {
+        //         nextFire = Time.time + fireRate;
+        //         FireProjectile();
+        //     }
+        // }
+
+        if (Input.touchCount > 0)
         {
-            startMousePos = Camera.main.ScreenToWorldPoint(screenPosDepth);
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            if (isCharge)
-                ChargeBow();
+            Touch touch = Input.GetTouch(0);
+            screenPosDepth = touch.position;
+            screenPosDepth.z = 10f;
 
-            arrowGFX.enabled = true;
-            currentMousePos = Camera.main.ScreenToWorldPoint(screenPosDepth);
-            velocity = (startMousePos - currentMousePos) * launchForce;
-
-            RotateLauncher();
-            DrawTrajectory();
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            isCharge = false;
-            ClearTrajectory();
-        }
-
-        if (Time.time > nextFire)
-        {
-            if (Input.GetMouseButtonUp(0))
+            if (touch.phase == TouchPhase.Began)
             {
-                nextFire = Time.time + fireRate;
-                FireProjectile();
+                startMousePos = Camera.main.ScreenToWorldPoint(screenPosDepth);
+                isTouching = true;
+            }
+            else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+            {
+                isTouching = true;
+                if (isCharge)
+                    ChargeBow();
+
+                arrowGFX.enabled = true;
+                currentMousePos = Camera.main.ScreenToWorldPoint(screenPosDepth);
+                velocity = (startMousePos - currentMousePos) * launchForce;
+
+                RotateLauncher();
+                DrawTrajectory();
+            }
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            {
+                isCharge = false;
+                ClearTrajectory();
+                isTouching = false;
+
+                if (Time.time > nextFire)
+                {
+                    nextFire = Time.time + fireRate;
+                    FireProjectile();
+                }
+            }
+        }
+        else // Untuk PC (mouse)
+        {
+            screenPosDepth = Input.mousePosition;
+            screenPosDepth.z = 10f;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                startMousePos = Camera.main.ScreenToWorldPoint(screenPosDepth);
+                isTouching = true;
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                isTouching = true;
+                if (isCharge)
+                    ChargeBow();
+
+                arrowGFX.enabled = true;
+                currentMousePos = Camera.main.ScreenToWorldPoint(screenPosDepth);
+                velocity = (startMousePos - currentMousePos) * launchForce;
+
+                RotateLauncher();
+                DrawTrajectory();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                isCharge = false;
+                ClearTrajectory();
+                isTouching = false;
+
+                if (Time.time > nextFire)
+                {
+                    nextFire = Time.time + fireRate;
+                    FireProjectile();
+                }
             }
         }
 
@@ -146,7 +224,7 @@ public class Launcher : MonoBehaviour
         }
 
         Transform pr = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-        pr.GetComponent<Rigidbody2D>().velocity = velocity;
+        pr.GetComponent<Rigidbody2D>().linearVelocity = velocity;
         Projectile projectileDamage = pr.GetComponent<Projectile>();
 
         float projectileTotalDamage = bowCharge * (projectileDamage.arrowDamage + arrowDamageUpgrade);

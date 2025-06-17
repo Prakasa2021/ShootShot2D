@@ -128,7 +128,7 @@ public class EnemyRanged : MonoBehaviour
         // Add velocity to the bullet if it has a Rigidbody component
         if (bullet.TryGetComponent<Rigidbody2D>(out var rb))
         {
-            rb.velocity = Vector2.left * bulletSpeed;
+            rb.linearVelocity = Vector2.left * bulletSpeed;
         }
     }
 

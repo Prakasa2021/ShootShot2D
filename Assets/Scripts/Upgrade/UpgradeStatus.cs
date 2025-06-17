@@ -128,6 +128,7 @@ public class UpgradeStatus : MonoBehaviour
             costMaxHealthUp += addCostMaxHealth;
             costMaxHealthText.text = costMaxHealthUp.ToString();
             health.healthBar.maxValue = health.maxHealth;
+            health.health = health.maxHealth;
         }
         healthLevel += 1;
     }

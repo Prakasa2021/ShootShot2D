@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         Destroy(gameObject, 15f);
     }

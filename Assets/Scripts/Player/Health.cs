@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] float health;
+    [SerializeField] public float health;
     [SerializeField] public float maxHealth;
     [SerializeField] public Slider healthBar;
+    public UnityEvent OnDie;
 
     // Start is called before the first frame update
     void Start()
@@ -17,23 +19,20 @@ public class Health : MonoBehaviour
         healthBar.maxValue = maxHealth;
     }
 
+    void Update()
+    {
+        healthBar.value = Mathf.Lerp(healthBar.value, health, Time.deltaTime / 0.5f);
+    }
+
     public void UpdateHealth(float mod)
     {
         health += mod;
 
-        if (health > maxHealth)
-        {
-            health = maxHealth;
-        }
-        else if (health <= 0f)
+        if (health <= 0f)
         {
             health = 0f;
+            OnDie?.Invoke();
             // healthBar.value = health;
         }
-    }
-
-    void OnGUI()
-    {
-        healthBar.value = Mathf.Lerp(healthBar.value, health, Time.deltaTime / 1f);
     }
 }

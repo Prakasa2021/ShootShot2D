@@ -14,7 +14,7 @@ public class Arrow : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = transform.up * arrowVelocity;
+        rb.linearVelocity = transform.up * arrowVelocity;
     }
 
     void OnCollisionEnter2D(Collision2D other)
